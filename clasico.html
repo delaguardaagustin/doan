@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DOAN · Software para presupuestar, ejecutar y controlar tus proyectos</title>
+<meta name="description" content="DOAN reúne cuatro herramientas para tu empresa: Presupuestos Pro y Control Pro ya disponibles; Calidad Pro y APR Pro, próximamente.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/doan-icono.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07111f;--surface:#0d1b2e;--surface-2:#12243c;--text:#eef4fa;--muted:#93a6ba;--line:rgba(255,255,255,.1);--azul:#2f7df6;--cian:#19c3d6;--verde:#2bd18b;--grad:linear-gradient(120deg,#2f7df6,#19c3d6 55%,#2bd18b);--radius:18px;--maxw:1140px;--f-head:"Sora",system-ui,sans-serif;--f-body:"Manrope",system-ui,sans-serif;--f-mono:"IBM Plex Mono",monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--f-body);-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%;display:block}a{color:inherit}
+h1,h2,h3{font-family:var(--f-head);line-height:1.08;margin:0;letter-spacing:-.6px}
+.wrap{width:min(var(--maxw),100% - 40px);margin:0 auto}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ojo{display:inline-flex;align-items:center;gap:10px;font:500 .8rem/1 var(--f-mono);letter-spacing:2px;text-transform:uppercase;color:var(--cian);margin-bottom:18px}
+.ojo::before{content:"";width:26px;height:2px;background:var(--grad)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;font:700 1rem/1 var(--f-body);text-decoration:none;border:1px solid var(--line);color:var(--text);transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+.btn:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.35)}
+.btn-pri{background:var(--grad);border:0;color:#041018;box-shadow:0 14px 34px -14px rgba(25,195,214,.75)}
+header{position:sticky;top:0;z-index:20;background:rgba(7,17,31,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:70px}
+.marca{display:flex;align-items:center;gap:12px;text-decoration:none;font:800 1.45rem/1 var(--f-head);letter-spacing:3px}
+.marca svg{width:38px;height:38px}
+.menu{display:flex;gap:28px;font-weight:600;font-size:.95rem;color:var(--muted)}
+.menu a{text-decoration:none}.menu a:hover{color:var(--text)}
+.hero{position:relative;overflow:hidden;padding:96px 0 84px}
+.hero::before{content:"";position:absolute;inset:-30% -10% auto auto;width:720px;height:720px;background:radial-gradient(circle,rgba(47,125,246,.28),transparent 62%);pointer-events:none}
+.hero::after{content:"";position:absolute;left:-12%;bottom:-45%;width:640px;height:640px;background:radial-gradient(circle,rgba(43,209,139,.2),transparent 62%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:54px;align-items:center}
+h1{font-size:clamp(2.5rem,6vw,4.4rem);font-weight:800}
+.hero p{font-size:1.15rem;color:var(--muted);max-width:54ch;margin:22px 0 32px}
+.botones{display:flex;flex-wrap:wrap;gap:12px}
+.orbita{position:relative;aspect-ratio:1;max-width:440px;margin-left:auto;width:100%}
+.orbita .anillo{position:absolute;inset:0;animation:gira 40s linear infinite}
+.orbita .centro{position:absolute;inset:27%;display:grid;place-items:center;border-radius:50%;background:var(--surface);border:1px solid var(--line);font:800 clamp(1.5rem,3.4vw,2.3rem)/1 var(--f-head);letter-spacing:5px}
+.sat{position:absolute;width:23%;aspect-ratio:1;border-radius:50%;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;box-shadow:0 18px 40px -20px #000}
+.sat svg{width:52%;height:52%;fill:none;stroke:url(#g);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.sat:nth-of-type(1){left:38.5%;top:-3%}.sat:nth-of-type(2){right:-3%;top:38.5%}.sat:nth-of-type(3){left:38.5%;bottom:-3%}.sat:nth-of-type(4){left:-3%;top:38.5%}
+.sat.pronto{opacity:.55}
+@keyframes gira{to{transform:rotate(360deg)}}
+section{padding:88px 0}
+.cab{max-width:62ch;margin-bottom:44px}
+h2{font-size:clamp(1.9rem,4.4vw,3rem);font-weight:700}
+.cab p{color:var(--muted);margin:16px 0 0}
+.productos{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.prod{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;display:flex;flex-direction:column;gap:14px;overflow:hidden;transition:transform .2s ease,border-color .2s ease}
+.prod:hover{transform:translateY(-4px);border-color:rgba(25,195,214,.5)}
+.prod .logo{display:flex;align-items:center;gap:16px}
+.prod .logo svg,.prod .logo img{width:66px;height:66px;flex:none}
+.prod .logo img{border-radius:50%;background:#fff}
+.prod .logo svg{fill:none;stroke:url(#g);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.prod h3{font-size:1.5rem}.prod h3 b{font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.prod p{margin:0;color:var(--muted)}
+.prod ul{list-style:none;margin:4px 0 8px;padding:0;display:grid;gap:9px;font-size:.97rem}
+.prod li{display:flex;gap:10px;align-items:flex-start}
+.prod li::before{content:"";flex:none;width:8px;height:8px;margin-top:9px;border-radius:50%;background:var(--grad)}
+.estado{position:absolute;right:20px;top:20px;font:500 .72rem/1 var(--f-mono);letter-spacing:1.5px;text-transform:uppercase;padding:8px 12px;border-radius:999px}
+.estado.ok{background:rgba(43,209,139,.14);color:var(--verde);border:1px solid rgba(43,209,139,.4)}
+.estado.pronto{background:rgba(255,255,255,.06);color:var(--muted);border:1px solid var(--line)}
+.prod.pronto{background:transparent;border-style:dashed}
+.prod .btn{margin-top:auto;align-self:flex-start}
+.banda{background:var(--surface);border-block:1px solid var(--line)}
+.pasos{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:p;list-style:none;margin:0;padding:0}
+.pasos li{counter-increment:p;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px}
+.pasos li::before{content:"0" counter(p);font:500 .85rem/1 var(--f-mono);color:var(--cian);letter-spacing:2px}
+.pasos h3{font-size:1.2rem;margin:14px 0 8px}.pasos p{margin:0;color:var(--muted);font-size:.97rem}
+.pasos small{display:inline-block;margin-top:14px;font:500 .72rem/1 var(--f-mono);letter-spacing:1px;color:var(--verde)}
+.datos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.dato{border-left:2px solid;border-image:var(--grad) 1;padding:4px 0 4px 22px}
+.dato h3{font-size:1.2rem;margin-bottom:8px}.dato p{margin:0;color:var(--muted);font-size:.98rem}
+.cierre{text-align:center;padding:96px 20px;background:radial-gradient(ellipse at 50% 0,rgba(47,125,246,.22),transparent 62%)}
+.cierre p{color:var(--muted);max-width:52ch;margin:18px auto 30px}
+.cierre .botones{justify-content:center}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.92rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
+.aparece{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}.aparece.visto{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.aparece{opacity:1;transform:none;transition:none}.orbita .anillo{animation:none}html{scroll-behavior:auto}}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.orbita{margin:0 auto;max-width:330px}.menu{display:none}.productos,.datos{grid-template-columns:1fr}.pasos{grid-template-columns:1fr 1fr}section{padding:64px 0}.hero{padding:64px 0 56px}}
+@media (max-width:560px){.pasos{grid-template-columns:1fr}.botones .btn{flex:1 1 100%}.estado{position:static;align-self:flex-start;order:-1}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f7df6"/><stop offset=".55" stop-color="#19c3d6"/><stop offset="1" stop-color="#2bd18b"/></linearGradient></defs>
+  <symbol id="i-anillo" viewBox="0 0 64 64"><path d="M32 6a26 26 0 0 1 24.600 17.600M58 32a26 26 0 0 1-17.600 24.600M32 58A26 26 0 0 1 7.400 40.400M6 32A26 26 0 0 1 23.600 7.400" stroke-width="5"/></symbol>
+  <symbol id="i-pres" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.500 7.500h7M8.500 11.500h2M13 11.500h2.500M8.500 15h2M13 15h2.500M8.500 18h7"/></symbol>
+  <symbol id="i-ctrl" viewBox="0 0 24 24"><path d="M4 20V10M9.300 20V6M14.700 20v-8M20 20V4"/><path d="M3 20.500h18"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><path d="M12 3 5 6v5.500c0 4.300 3 7.700 7 9.500 4-1.800 7-5.200 7-9.500V6l-7-3Z"/><path d="m8.800 12 2.300 2.300 4.200-4.400"/></symbol>
+  <symbol id="i-apr" viewBox="0 0 24 24"><path d="M4.500 15.500a7.500 7.500 0 0 1 15 0"/><path d="M3 15.500h18v2.500H3zM10 8.300V5h4v3.300"/></symbol>
+</svg>
+
+<header><div class="wrap nav">
+  <a class="marca" href="#inicio" aria-label="DOAN, inicio">
+    <svg viewBox="0 0 64 64" fill="none" stroke="url(#g)" stroke-linecap="round" aria-hidden="true"><use href="#i-anillo"/><circle cx="32" cy="32" r="9" fill="url(#g)" stroke="none"/></svg>DOAN</a>
+  <nav class="menu" aria-label="Secciones"><a href="#productos">Productos</a><a href="#como-funciona">Cómo funciona</a><a href="#plataforma">Plataforma</a></nav>
+  <a class="btn btn-pri" href="https://pablohuaiquiman.github.io/presupuesto.app/" target="_blank" rel="noopener">Entrar</a>
+</div></header>
+
+<main id="inicio">
+<div class="hero"><div class="wrap">
+  <div>
+    <span class="ojo">Software para tu empresa</span>
+    <h1>Presupuesta, ejecuta y <span class="grad">controla</span> cada proyecto</h1>
+    <p>DOAN reúne en un solo lugar las herramientas que tu empresa usa todos los días: desde el presupuesto que le envías al cliente hasta el último estado de pago.</p>
+    <div class="botones">
+      <a class="btn btn-pri" href="#productos">Ver los productos</a>
+      <a class="btn" href="https://pablohuaiquiman.github.io/presupuesto.app/" target="_blank" rel="noopener">Crear cuenta de empresa</a>
+    </div>
+  </div>
+  <div class="orbita" aria-hidden="true">
+    <svg class="anillo" viewBox="0 0 64 64" fill="none" stroke="url(#g)" stroke-linecap="round" opacity=".5"><use href="#i-anillo"/></svg>
+    <div class="centro">DOAN</div>
+    <div class="sat"><svg><use href="#i-pres"/></svg></div>
+    <div class="sat"><svg><use href="#i-ctrl"/></svg></div>
+    <div class="sat pronto"><svg><use href="#i-cal"/></svg></div>
+    <div class="sat pronto"><svg><use href="#i-apr"/></svg></div>
+  </div>
+</div></div>
+
+<section id="productos"><div class="wrap">
+  <div class="cab aparece"><span class="ojo">Productos</span><h2>Cuatro herramientas, <span class="grad">una sola cuenta</span></h2><p>Dos ya están disponibles y se usan desde el computador o el celular. Las otras dos vienen en camino.</p></div>
+  <div class="productos">
+    <article class="prod aparece">
+      <span class="estado ok">Disponible</span>
+      <div class="logo"><img src="assets/presupuestos-pro.png" alt="" width="66" height="66"><h3>Presupuestos <b>Pro</b></h3></div>
+      <p>Arma presupuestos claros, envíalos y conviértelos en órdenes de trabajo firmadas por tu cliente.</p>
+      <ul>
+        <li>Presupuestos por partidas, con PDF listo para enviar.</li>
+        <li>Seguimiento de enviados y adjudicados.</li>
+        <li>Órdenes de trabajo con firma remota del cliente, desde un enlace.</li>
+        <li>Varios usuarios por empresa, cada uno con su rol.</li>
+      </ul>
+      <a class="btn btn-pri" href="https://pablohuaiquiman.github.io/presupuesto.app/" target="_blank" rel="noopener">Abrir Presupuestos Pro</a>
+    </article>
+    <article class="prod aparece">
+      <span class="estado ok">Disponible</span>
+      <div class="logo"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-anillo"/><g transform="translate(18 18) scale(1.17)" stroke-width="1.6"><use href="#i-ctrl" width="24" height="24"/></g></svg><h3>Control <b>Pro</b></h3></div>
+      <p>Lleva el control de cada proyecto adjudicado: cuánto has cobrado, cuánto has gastado y cuál es tu margen real.</p>
+      <ul>
+        <li>Un centro de costo por proyecto, con su resumen al día.</li>
+        <li>Estados de pago por avance, con anticipos y retenciones.</li>
+        <li>Gastos con respaldo en foto o PDF, aprobados por el encargado.</li>
+        <li>Exportación a Excel y PDF.</li>
+      </ul>
+      <a class="btn btn-pri" href="https://pablohuaiquiman.github.io/presupuesto.app/" target="_blank" rel="noopener">Abrir Control Pro</a>
+    </article>
+    <article class="prod pronto aparece">
+      <span class="estado pronto">Próximamente</span>
+      <div class="logo"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-anillo"/><g transform="translate(18 18) scale(1.17)" stroke-width="1.6"><use href="#i-cal" width="24" height="24"/></g></svg><h3>Calidad <b>Pro</b></h3></div>
+      <p>Control de calidad para tus trabajos. Estamos terminándolo.</p>
+    </article>
+    <article class="prod pronto aparece">
+      <span class="estado pronto">Próximamente</span>
+      <div class="logo"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-anillo"/><g transform="translate(18 18) scale(1.17)" stroke-width="1.6"><use href="#i-apr" width="24" height="24"/></g></svg><h3>APR <b>Pro</b></h3></div>
+      <p>Prevención de riesgos para tus faenas. Estamos terminándolo.</p>
+    </article>
+  </div>
+</div></section>
+
+<section id="como-funciona" class="banda"><div class="wrap">
+  <div class="cab aparece"><span class="ojo">Cómo funciona</span><h2>Del presupuesto <span class="grad">al cobro</span></h2><p>Todo queda conectado: lo que presupuestas es lo mismo que después ejecutas y cobras.</p></div>
+  <ol class="pasos aparece">
+    <li><h3>Presupuestas</h3><p>Armas el presupuesto por partidas y lo envías en PDF.</p><small>Presupuestos Pro</small></li>
+    <li><h3>Tu cliente firma</h3><p>La orden de trabajo se firma a distancia, desde un enlace.</p><small>Presupuestos Pro</small></li>
+    <li><h3>Ejecutas</h3><p>El proyecto pasa a ejecución con su centro de costo y sus gastos.</p><small>Control Pro</small></li>
+    <li><h3>Cobras</h3><p>Presentas los estados de pago y ves qué está aprobado, pagado o atrasado.</p><small>Control Pro</small></li>
+  </ol>
+</div></section>
+
+<section id="plataforma"><div class="wrap">
+  <div class="cab aparece"><span class="ojo">Plataforma</span><h2>Pensada para <span class="grad">el día a día</span></h2></div>
+  <div class="datos aparece">
+    <div class="dato"><h3>Desde el celular o el computador</h3><p>Funciona en el navegador, sin instalar nada.</p></div>
+    <div class="dato"><h3>Los datos de tu empresa, separados</h3><p>Cada empresa ve solo su información, y cada usuario según su rol.</p></div>
+    <div class="dato"><h3>Plan mensual por empresa</h3><p>La mensualidad se paga con Mercado Pago o por transferencia.</p></div>
+  </div>
+</div></section>
+
+<div class="cierre">
+  <h2>Empieza con <span class="grad">Presupuestos Pro</span></h2>
+  <p>Crea la cuenta de tu empresa y, cuando esté aprobada, empieza a presupuestar.</p>
+  <div class="botones"><a class="btn btn-pri" href="https://pablohuaiquiman.github.io/presupuesto.app/" target="_blank" rel="noopener">Crear cuenta de empresa</a></div>
+</div>
+</main>
+
+<footer><div class="wrap"><span>DOAN · Presupuestos Pro · Control Pro · Calidad Pro · APR Pro</span><span>&copy; <span id="y"></span> DOAN</span></div></footer>
+<script>
+(function(){
+  document.getElementById("y").textContent=new Date().getFullYear();
+  var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("visto");io.unobserve(e.target)}})},{threshold:.12}):null;
+  document.querySelectorAll(".aparece").forEach(function(el){io?io.observe(el):el.classList.add("visto")});
+})();
+</script>
+</body>
+</html>
