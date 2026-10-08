@@ -145,20 +145,20 @@ footer{position:relative;z-index:10;padding:26px clamp(18px,6vw,84px) 34px;font:
   <span class="estado luego">Próximamente</span>
   <h2>Calidad <em>Pro</em></h2>
   <p>Control de calidad para tus trabajos. Estamos terminándolo: asegura tu demo y te avisamos apenas esté lista.</p>
-  <div class="botones"><button class="btn btn-oro" type="button" data-demo="Calidad Pro">Asegura tu demo →</button></div>
+  <ul><li>Listas de chequeo para cada trabajo</li><li>Reportes en PDF</li><li>Tiempo que tardan en resolverse las observaciones</li><li>Actas de recepción de trabajos y actas de entrega</li><li>Alertas de calidad y no conformidades</li></ul><p><strong>Disponible en octubre de 2026.</strong></p><div class="botones"><button class="btn btn-oro" type="button" data-demo="Calidad Pro">Asegura tu demo →</button></div>
 </div></section>
 
 <section class="tramo" id="apr-pro" data-parada="APR Pro"><div class="carta">
   <span class="estado luego">Próximamente</span>
   <h2>APR <em>Pro</em></h2>
   <p>Prevención de riesgos para tus faenas. Estamos terminándolo: asegura tu demo y te avisamos apenas esté lista.</p>
-  <div class="botones"><button class="btn btn-oro" type="button" data-demo="APR Pro">Asegura tu demo →</button></div>
+  <p><strong>Disponible en octubre de 2026.</strong></p><div class="botones"><button class="btn btn-oro" type="button" data-demo="APR Pro">Asegura tu demo →</button></div>
 </div></section>
 
 <section class="tramo der" id="plataforma" data-parada="La plataforma"><div class="carta">
   <span class="ojo oro">La plataforma</span>
   <h2>Pensada para <em style="color:var(--seal)">el día a día</em></h2>
-  <ul><li>Funciona en el navegador, desde el celular o el computador</li><li>Cada empresa ve solo su información, y cada usuario según su rol</li><li>Plan mensual por empresa, que se paga con Mercado Pago o por transferencia</li></ul>
+  <ul><li>Funciona en el navegador, desde el celular o el computador</li><li>Cada empresa ve solo su información, y cada usuario según su rol</li><li>Plan mensual por empresa, que se paga con Mercado Pago o por transferencia</li><li><strong>Prueba: 7 días</strong></li><li><strong>Estándar: $30.000 al mes</strong></li><li><strong>Pro: $50.000 al mes</strong></li></ul>
   <div class="botones"><a class="btn" href="https://pablohuaiquiman.github.io/presupuesto.app/" target="_blank" rel="noopener">Ver la plataforma →</a></div>
 </div></section>
 
@@ -395,6 +395,9 @@ button.btn{cursor:pointer}
 .reserva .fila button{flex:1 1 140px;min-height:46px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:none;color:#eef4fa;font:inherit;font-weight:600;cursor:pointer}
 .reserva .fila .enviar{background:#2bd18b;border-color:#2bd18b;color:#03170d}
 .reserva label span{font-weight:500;color:#93a6ba}
+.reserva .acepta{display:flex;align-items:flex-start;gap:10px;font-weight:500;color:#c9d6e3;cursor:pointer}
+.reserva .acepta input{width:20px;min-height:20px;height:20px;flex:none;margin:1px 0 0;padding:0;accent-color:#2bd18b}
+.reserva .acepta span{color:#c9d6e3}
 .reserva .trampa{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .reserva small a{color:#19c3d6}
 .reserva small{color:#93a6ba;font-size:.78rem;line-height:1.45}
@@ -407,12 +410,13 @@ button.btn{cursor:pointer}
     <label>Empresa <span>(opcional)</span><input name="empresa" autocomplete="organization" maxlength="80"></label>
     <label>Correo<input name="correo" type="email" autocomplete="email" required maxlength="120"></label>
     <label>Teléfono<input name="telefono" type="tel" autocomplete="tel" inputmode="tel" required minlength="8" maxlength="20" placeholder="+56 9"></label>
+    <label class="acepta"><input type="checkbox" name="novedades" value="si"><span>Quiero recibir novedades y ofertas de DOAN por correo o WhatsApp.</span></label>
     <input class="trampa" name="web" tabindex="-1" autocomplete="off" aria-hidden="true">
     <div class="fila">
       <button type="button" id="reserva-cerrar">Cancelar</button>
       <button type="submit" class="enviar">Enviar por WhatsApp</button>
     </div>
-    <small>Al enviar se abre WhatsApp con tus datos ya escritos; solo falta que presiones enviar. Se usan únicamente para avisarte de esta demo.</small>
+    <small>Al enviar se abre WhatsApp con tus datos ya escritos; solo falta que presiones enviar. Los usamos para avisarte de esta demo y, solo si marcas la casilla, para enviarte novedades de DOAN. Puedes pedir que los borremos cuando quieras.</small>
   </form>
 </dialog>
 <script>
@@ -437,9 +441,11 @@ button.btn{cursor:pointer}
     var lineas = ["Hola, quiero asegurar mi demo de " + producto + ".", "Nombre: " + dato("nombre")];
     if (dato("empresa")) lineas.push("Empresa: " + dato("empresa"));
     lineas.push("Correo: " + dato("correo"), "Teléfono: " + dato("telefono"));
+    var novedades = d.get("novedades") ? "Sí" : "No";
+    lineas.push("Quiero recibir novedades de DOAN: " + novedades);
     var texto = lineas.join(String.fromCharCode(10));
     if (PLANILLA) {
-      var cuerpo = new URLSearchParams({producto: producto, nombre: dato("nombre"), empresa: dato("empresa"), correo: dato("correo"), telefono: dato("telefono")});
+      var cuerpo = new URLSearchParams({producto: producto, nombre: dato("nombre"), empresa: dato("empresa"), correo: dato("correo"), telefono: dato("telefono"), novedades: novedades});
       try { fetch(PLANILLA, {method: "POST", mode: "no-cors", keepalive: true, body: cuerpo}).catch(function(){}); } catch (err) {}
     }
     window.open("https://wa.me/" + NUMERO + "?text=" + encodeURIComponent(texto), "_blank", "noopener");
