@@ -152,12 +152,14 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-bet
     <article class="prod pronto aparece">
       <span class="estado pronto">Próximamente</span>
       <div class="logo"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-anillo"/><g transform="translate(18 18) scale(1.17)" stroke-width="1.6"><use href="#i-cal" width="24" height="24"/></g></svg><h3>Calidad <b>Pro</b></h3></div>
-      <p>Control de calidad para tus trabajos. Estamos terminándolo.</p>
+      <p>Control de calidad para tus trabajos. Estamos terminándolo: asegura tu demo y te avisamos apenas esté lista.</p>
+      <button class="btn btn-pri" type="button" data-demo="Calidad Pro">Asegura tu demo</button>
     </article>
     <article class="prod pronto aparece">
       <span class="estado pronto">Próximamente</span>
       <div class="logo"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-anillo"/><g transform="translate(18 18) scale(1.17)" stroke-width="1.6"><use href="#i-apr" width="24" height="24"/></g></svg><h3>APR <b>Pro</b></h3></div>
-      <p>Prevención de riesgos para tus faenas. Estamos terminándolo.</p>
+      <p>Prevención de riesgos para tus faenas. Estamos terminándolo: asegura tu demo y te avisamos apenas esté lista.</p>
+      <button class="btn btn-pri" type="button" data-demo="APR Pro">Asegura tu demo</button>
     </article>
   </div>
 </div></section>
@@ -196,5 +198,74 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-bet
   document.querySelectorAll(".aparece").forEach(function(el){io?io.observe(el):el.classList.add("visto")});
 })();
 </script>
+<!-- reserva:inicio -->
+<style>
+button.btn{cursor:pointer}
+.reserva{width:min(420px,calc(100% - 32px));padding:0;border:1px solid rgba(255,255,255,.16);border-radius:14px;background:#0d1b2e;color:#eef4fa;box-shadow:0 40px 80px -30px #000}
+.reserva::backdrop{background:rgba(3,9,18,.72);backdrop-filter:blur(4px)}
+.reserva form{display:grid;gap:14px;padding:24px}
+.reserva h3{margin:0;font:800 1.35rem/1.15 'Sora',system-ui,sans-serif;letter-spacing:-.01em}
+.reserva h3 b{color:#2bd18b;font-weight:800}
+.reserva p{margin:0;color:#93a6ba;font-size:.92rem;line-height:1.5}
+.reserva label{display:grid;gap:6px;font-size:.85rem;font-weight:600;color:#c9d6e3}
+.reserva input{width:100%;min-height:46px;padding:0 13px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:#07111f;color:#eef4fa;font:inherit;font-size:1rem;font-weight:500}
+.reserva input:focus-visible{outline:2px solid #19c3d6;outline-offset:1px}
+.reserva .fila{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.reserva .fila button{flex:1 1 140px;min-height:46px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:none;color:#eef4fa;font:inherit;font-weight:600;cursor:pointer}
+.reserva .fila .enviar{background:#2bd18b;border-color:#2bd18b;color:#03170d}
+.reserva label span{font-weight:500;color:#93a6ba}
+.reserva .trampa{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.reserva small a{color:#19c3d6}
+.reserva small{color:#93a6ba;font-size:.78rem;line-height:1.45}
+</style>
+<dialog class="reserva" id="reserva" aria-labelledby="reserva-titulo">
+  <form id="reserva-form">
+    <h3 id="reserva-titulo">Asegura tu demo de <b id="reserva-producto"></b></h3>
+    <p>Déjanos tus datos y te avisamos apenas la demo esté lista.</p>
+    <label>Nombre<input name="nombre" autocomplete="name" required maxlength="80"></label>
+    <label>Empresa <span>(opcional)</span><input name="empresa" autocomplete="organization" maxlength="80"></label>
+    <label>Correo<input name="correo" type="email" autocomplete="email" required maxlength="120"></label>
+    <label>Teléfono<input name="telefono" type="tel" autocomplete="tel" inputmode="tel" required minlength="8" maxlength="20" placeholder="+56 9"></label>
+    <input class="trampa" name="web" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="fila">
+      <button type="button" id="reserva-cerrar">Cancelar</button>
+      <button type="submit" class="enviar">Enviar por WhatsApp</button>
+    </div>
+    <small>Al enviar se abre WhatsApp con tus datos ya escritos; solo falta que presiones enviar. Se usan únicamente para avisarte de esta demo.</small>
+  </form>
+</dialog>
+<script>
+(function(){
+  var NUMERO = "56939180369", PLANILLA = "";
+  var caja = document.getElementById("reserva"), form = document.getElementById("reserva-form"), producto = "";
+  if (!caja || !caja.showModal) return;
+  document.querySelectorAll("[data-demo]").forEach(function(b){
+    b.addEventListener("click", function(){
+      producto = b.getAttribute("data-demo");
+      document.getElementById("reserva-producto").textContent = producto;
+      caja.showModal();
+    });
+  });
+  document.getElementById("reserva-cerrar").addEventListener("click", function(){ caja.close(); });
+  caja.addEventListener("click", function(e){ if (e.target === caja) caja.close(); });
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var d = new FormData(form);
+    if (d.get("web")) { caja.close(); return; }
+    var dato = function(k){ return String(d.get(k) || "").trim(); };
+    var lineas = ["Hola, quiero asegurar mi demo de " + producto + ".", "Nombre: " + dato("nombre")];
+    if (dato("empresa")) lineas.push("Empresa: " + dato("empresa"));
+    lineas.push("Correo: " + dato("correo"), "Teléfono: " + dato("telefono"));
+    var texto = lineas.join(String.fromCharCode(10));
+    if (PLANILLA) {
+      var cuerpo = new URLSearchParams({producto: producto, nombre: dato("nombre"), empresa: dato("empresa"), correo: dato("correo"), telefono: dato("telefono")});
+      try { fetch(PLANILLA, {method: "POST", mode: "no-cors", keepalive: true, body: cuerpo}).catch(function(){}); } catch (err) {}
+    }
+    window.open("https://wa.me/" + NUMERO + "?text=" + encodeURIComponent(texto), "_blank", "noopener");
+    form.reset(); caja.close();
+  });
+})();
+</script>
+<!-- reserva:fin -->
 </body>
 </html>

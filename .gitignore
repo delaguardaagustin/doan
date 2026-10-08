@@ -1,3 +1,8 @@
 material/
 _capturas/
 *.py
+_reserva.html
+_privacidad.html
+datos.json
+google/
+LEEME-datos.md
