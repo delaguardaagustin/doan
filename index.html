@@ -262,7 +262,7 @@ if (!hay3d) {
 
   /* Puertas de los tres niveles: un vano iluminado en la pared lateral, con su rótulo y una hoja que se abre al llegar */
   const puertas = [];
-  function puerta(lado, z, color, nombre, numero) {
+  function puerta(lado, z, color, nombre, numero, logo) {
     const x = lado * (MITAD - .01), g = new THREE.Group(); g.position.set(x, 0, z); g.rotation.y = -lado * Math.PI / 2; escena.add(g);
     const fondo = new THREE.Mesh(new THREE.PlaneGeometry(1.7, 2.9), new THREE.MeshBasicMaterial({ color, transparent: true, opacity: .9 })); fondo.position.set(0, 1.45, .01); g.add(fondo);
     const c = document.createElement('canvas'); c.width = 64; c.height = 256; const q = c.getContext('2d'); const gr = q.createLinearGradient(0, 0, 0, 256); gr.addColorStop(0, 'rgba(255,255,255,.95)'); gr.addColorStop(.55, 'rgba(255,255,255,.25)'); gr.addColorStop(1, 'rgba(255,255,255,.75)'); q.fillStyle = gr; q.fillRect(0, 0, 64, 256);
@@ -275,12 +275,17 @@ if (!hay3d) {
     const rot = cartel(nombre, { ancho: 2.6, alto: .34, fuente: '700 96px "Sora"', espaciado: '0.06em' }); g.add(rot); rot.position.set(.55, 3.38, .05);
     const l = new THREE.PointLight(color, 16, 9, 1.7); l.position.set(lado * (MITAD - 1.2), 1.9, z); escena.add(l);
     const franja = caja(.9, .02, 2.2, luz(color), lado * (MITAD - .5), .012, z); franja.material.transparent = true; franja.material.opacity = .5;
+    if (logo) {
+      const tx = new THREE.TextureLoader().load(logo); tx.colorSpace = THREE.SRGBColorSpace; tx.anisotropy = 8;
+      const borde = new THREE.Mesh(new THREE.PlaneGeometry(1.34, 1.02), new THREE.MeshBasicMaterial({ color })); borde.position.set(.85, 1.8, .034); eje.add(borde);
+      const placa = new THREE.Mesh(new THREE.PlaneGeometry(1.28, .95), new THREE.MeshBasicMaterial({ map: tx })); placa.position.set(.85, 1.8, .038); eje.add(placa);
+    }
     puertas.push({ eje, z, l });
   }
-  puerta(-1, -11, AZUL, 'PRESUPUESTOS PRO', '01');
-  puerta(1, -18, ACERO, 'CONTROL PRO', '02');
-  puerta(-1, -25, GRIS, 'CALIDAD PRO', '03');
-  puerta(1, -32, GRIS, 'APR PRO', '04');
+  puerta(-1, -11, AZUL, 'PRESUPUESTOS PRO', '01', 'assets/logo-presupuestos-pro.jpg');
+  puerta(1, -18, ACERO, 'CONTROL PRO', '02', 'assets/logo-control-pro.jpg');
+  puerta(-1, -25, GRIS, 'CALIDAD PRO', '03', 'assets/logo-calidad-pro.jpg');
+  puerta(1, -32, GRIS, 'APR PRO', '04', 'assets/logo-apr-pro.jpg');
 
   /* Sala de trabajos: cuadros con capturas reales de los sitios */
   const cargador = new THREE.TextureLoader();
